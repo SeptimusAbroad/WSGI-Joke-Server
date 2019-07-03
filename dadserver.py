@@ -2,9 +2,10 @@ from wsgiref.simple_server import make_server
 import requests
 import random
 
-"""This function calls out to the icanhazdadjoke.com API and shoots out a GET request. It then stores the results
-in a local variable and encodes them into a bytestring format contained in a list for display on an HTML page."""
+
 def dadjoke3000():
+    """This function calls out to the icanhazdadjoke.com API and shoots out a GET request. It then stores the results
+    in a local variable and encodes them into a bytestring format contained in a list for display on an HTML page."""
     url = "https://icanhazdadjoke.com/search"
     search = ""
     response = requests.get(url, headers={"Accept": "application/json"}, params={"term": search})
@@ -13,7 +14,7 @@ def dadjoke3000():
     amount1 = (len(data['results']))
     amount2 = amount1 - 1
     response1 = (results[random.randint(0, amount2)]["joke"])
-    jokes = (f"<h1>I have a random dad joke for you! Here's one: {response1}</h1>")
+    jokes = f"<h1>I have a random dad joke for you! Here's one: {response1}</h1>"
     return [jokes.encode('utf-8')]
 
 
@@ -33,5 +34,5 @@ def main():
         server.serve_forever()
 
 
-if __name__ =="__main__":
+if __name__ == "__main__":
     main()
